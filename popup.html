@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MoneyFlow 💸</title>
+  
+  <meta charset="UTF-8"> 
+  
+  <style>
+    /* COLORS: START: #008080 (Deep Teal) | RUNNING: #ffbf00 (Amber Gold) */
+
+    /* KEYFRAMES FOR ANIMATIONS (No functional changes) */
+    @keyframes smooth-glow-start {
+        0%, 100% { box-shadow: 0 0 8px #008080, inset 0 0 8px #008080; }
+        50% { box-shadow: 0 0 15px #00a0a0, inset 0 0 15px #00a0a0; }
+    }
+    @keyframes smooth-glow-running {
+      0%, 100% { box-shadow: 0 0 8px #ffbf00, inset 0 0 8px #ffbf00; }
+      50% { box-shadow: 0 0 15px #ffdb58, inset 0 0 15px #ffdb58; }
+    }
+    @keyframes button-transition-flash {
+        0% { transform: scale(1); background-color: transparent; }
+        50% { transform: scale(1.05); background-color: #ff3333; color: white; border-color: #ff3333; }
+        100% { transform: scale(1); background-color: transparent; }
+    }
+    @keyframes cash-piling-base {
+        0% { background-position: -100% 0; }
+        100% { background-position: 200% 0; }
+    }
+    @keyframes background-sparkle {
+        0% { background-position: 0% 0%; }
+        100% { background-position: 100% 100%; }
+    }
+    @keyframes breathing-shadow {
+        0%, 100% { box-shadow: 0 0 10px rgba(0,0,0,0.5), 0 0 15px #d4af37; }
+        50% { box-shadow: 0 0 15px rgba(0,0,0,0.7), 0 0 25px #d4af37; }
+    }
+
+
+    /* GLOBAL STYLES */
+    body { 
+      width: 300px; 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      padding: 15px; 
+      background-color: #331111;
+      color: #e0f7fa;
+      background-image: radial-gradient(#1a2c42 1px, transparent 0);
+      background-size: 15px 15px;
+      animation: background-sparkle 60s linear infinite;
+    }
+    .header {
+      color: #79a6d8; 
+      text-align: center;
+      margin-bottom: 20px; /* Increased margin for better separation */
+      font-size: 1.2em;
+      font-weight: 700;
+      text-shadow: 0 0 5px #79a6d8;
+    }
+    .label { 
+      margin-bottom: 5px; /* Spacing above the label */
+      display: block; 
+      font-weight: 500;
+      color: #e0f7fa;
+    }
+    input { 
+      width: 100%; 
+      box-sizing: border-box; 
+      padding: 10px; 
+      margin-bottom: 20px; /* Increased spacing below input */
+      border: 2px solid #555;
+      border-radius: 8px;
+      font-size: 1em;
+      background-color: #1a2c42;
+      color: #e0f7fa;
+    }
+
+
+    /* BUTTON STYLES (Teal/Amber Gold) */
+    .btn-container {
+        position: relative; overflow: hidden; border-radius: 8px; margin-bottom: 15px; z-index: 10;
+        border: 2px solid #008080; animation: smooth-glow-start 2s infinite alternate;
+    }
+    .btn-container::before { display: none; }
+    button { 
+      position: relative; width: 100%; padding: 10px; background-color: transparent; 
+      color: #008080; border: none; border-radius: 6px; cursor: pointer; 
+      font-weight: bold; transition: color 0.3s ease-in-out; text-shadow: 0 0 3px #008080; z-index: 10;
+    }
+    .running { color: #ffbf00 !important; text-shadow: 0 0 3px #ffbf00; animation: none !important; }
+    .running + .btn-container { border-color: #ffbf00; animation: smooth-glow-running 2s infinite alternate; }
+    .running + .btn-container::before { opacity: 0; animation: none; }
+
+
+    /* DISPLAY BOX STYLES */
+    #display { 
+      margin-top: 20px; padding: 15px 10px; background-color: #1a2c42;
+      border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.5); 
+      font-size: 1.8em; font-weight: 800; text-align: center; 
+      color: #d4af37; min-height: 40px; display: flex;
+      align-items: center; justify-content: center;
+      background-size: 300% 100%; 
+      transition: background-position 1s linear; 
+    }
+
+    /* PILING EFFECT CLASSES (Color & Speed) */
+    .piling-cash {
+        animation: breathing-shadow 3s infinite alternate;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5), 0 0 15px #d4af37;
+    }
+    /* Flow Stage 1: < 40k | Speed: 4.0s | Color: Soft Silver */
+    .flow-stage-1 { 
+        background-image: linear-gradient(to right, #1a2c42 0%, #a9a9a9 50%, #1a2c42 100%);
+        animation: cash-piling-base 4.0s linear infinite, breathing-shadow 3s infinite alternate;
+    }
+    /* Flow Stage 2: 40k - 79.9k | Speed: 2.0s | Color: Soft Teal */
+    .flow-stage-2 { 
+        background-image: linear-gradient(to right, #1a2c42 0%, #4682b4 50%, #1a2c42 100%);
+        animation: cash-piling-base 2.0s linear infinite, breathing-shadow 3s infinite alternate;
+    }
+    /* Flow Stage 3: 80k - 119.9k | Speed: 1.0s | Color: Soft Green */
+    .flow-stage-3 { 
+        background-image: linear-gradient(to right, #1a2c42 0%, #3cb371 50%, #1a2c42 100%);
+        animation: cash-piling-base 1.0s linear infinite, breathing-shadow 3s infinite alternate;
+    }
+    /* Flow Stage 4: 120k - 159.9k | Speed: 0.5s | Color: Vibrant Gold */
+    .flow-stage-4 { 
+        background-image: linear-gradient(to right, #1a2c42 0%, #ffd700 50%, #1a2c42 100%);
+        animation: cash-piling-base 0.5s linear infinite, breathing-shadow 3s infinite alternate;
+    }
+    /* Flow Stage 5: 160k - 199.9k | Speed: 0.25s | Color: Fire Opal */
+    .flow-stage-5 { 
+        background-image: linear-gradient(to right, #1a2c42 0%, #ff4500 50%, #1a2c42 100%);
+        animation: cash-piling-base 0.25s linear infinite, breathing-shadow 3s infinite alternate;
+    }
+    /* Flow Stage 6: 200k+ | Speed: 0.1s | Color: Electric Purple */
+    .flow-stage-6 { 
+        background-image: linear-gradient(to right, #1a2c42 0%, #9400d3 50%, #1a2c42 100%);
+        animation: cash-piling-base 0.1s linear infinite, breathing-shadow 3s infinite alternate;
+    }
+
+
+    /* Other UI Elements remain the same... */
+    #timeElapsed { font-size: 0.8em; color: #99aabb; text-align: center; margin-top: 10px; }
+    #startTimeDisplay { margin-top: 10px; padding: 5px; background-color: #1a2c42; border-radius: 8px; font-size: 0.75em; color: #00bcd4; text-align: center; text-shadow: 0 0 3px #00bcd4; display: none; }
+  </style>
+</head>
+<body>
+  <div class="header">💰 **MoneyFlow 💸** 💰</div>
+  <label class="label" for="monthlySalary">Monthly Salary (in ₹):</label>
+  <input type="number" id="monthlySalary" placeholder="e.g., 50000">
+  
+  <div class="btn-container">
+    <button id="startButton">Start Earning!</button>
+  </div>
+  
+  <div id="display" class="piling-cash">
+    ₹0.00
+  </div>
+  
+  <div id="startTimeDisplay"></div>
+
+  <div id="timeElapsed">
+    0 seconds
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
